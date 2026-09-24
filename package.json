@@ -1,0 +1,15 @@
+{
+  "name": "sudoku-duel",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Sudoku en 1 contre 1 — version Vercel",
+  "scripts": {
+    "dev": "node dev-server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.39.0"
+  }
+}
