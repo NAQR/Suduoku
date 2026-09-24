@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Sudoku duel</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/manrope.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">Sudoku<span>duel</span></div>
+  <button class="icon-btn" id="themeBtn" aria-label="Changer de thème">
+    <svg id="icoMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z"/></svg>
+    <svg id="icoSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+  </button>
+</header>
+
+<main>
+  <!-- ACCUEIL -->
+  <section id="home" class="col">
+    <h1>Même grille, même départ.</h1>
+    <p class="lead">Le premier qui la termine sans erreur gagne.</p>
+    <p class="label">Difficulté</p>
+    <div class="seg" role="radiogroup" id="diffSeg"></div>
+    <button class="btn primary wide big mt16" id="genBtn">Générer la grille</button>
+    <div class="sep"></div>
+    <p class="label">Rejoindre avec un code</p>
+    <div class="join">
+      <input id="codeIn" maxlength="5" placeholder="Code à 5 lettres" autocomplete="off" spellcheck="false">
+      <button class="btn secondary" id="joinBtn">Rejoindre</button>
+    </div>
+    <p class="msg" id="homeMsg"></p>
+  </section>
+
+  <!-- SALLE D'ATTENTE -->
+  <section id="lobby" class="col" hidden>
+    <p class="muted m0" id="lobbyTitle">Code de la partie</p>
+    <div class="code" id="lobbyCode"></div>
+    <p class="muted m0" id="lobbyDiff"></p>
+    <div id="shareBox">
+      <div class="share"><button class="btn secondary" id="copyBtn">Copier le code</button></div>
+      <p class="hint">Communiquez ce code à votre adversaire. Il le saisit dans « Rejoindre avec un code » sur l'accueil.</p>
+    </div>
+    <div class="status"><span class="dot" id="lobbyDot"></span><span id="lobbyStatus"></span></div>
+    <button class="btn primary wide big" id="startBtn" hidden>Afficher la grille et commencer à jouer</button>
+    <button class="btn ghost mt12" id="leaveLobby">Quitter la partie</button>
+  </section>
+
+  <!-- JEU -->
+  <section id="game" class="game" hidden>
+    <div class="gamebar">
+      <div class="timer" id="timer" aria-live="off">00:00</div>
+      <div class="meta"><strong id="diffLabel"></strong><span id="oppStatus"></span></div>
+    </div>
+    <div class="stage">
+      <div class="board" id="board" tabindex="0" role="grid" aria-label="Grille de sudoku"></div>
+      <div class="pad" id="pad">
+        <div class="digits" id="digits"></div>
+        <div class="tools">
+          <button class="tool" id="noteBtn" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg>Annoter</button>
+          <button class="tool" id="eraseBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20H9L4 15a2 2 0 0 1 0-2.8L13.2 3a2 2 0 0 1 2.8 0l4 4a2 2 0 0 1 0 2.8L11 19"/></svg>Effacer</button>
+          <button class="tool" id="undoBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>Annuler</button>
+        </div>
+        <p class="wrongmsg" id="wrongMsg" hidden>La grille est pleine mais contient des erreurs.</p>
+        <p class="kbd">Clavier : chiffres, flèches, N pour annoter, Retour arrière pour effacer.</p>
+        <button class="btn ghost" id="leaveGame">Quitter la partie</button>
+      </div>
+    </div>
+    <div class="overlay" id="overlay" hidden><div class="end-card" id="endCard"></div></div>
+  </section>
+</main>
+<div class="banner" id="banner" role="status" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
